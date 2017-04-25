@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PhraseDatabaseManager</string>
+    <string name="add">ADD</string>
+    <string name="cancel">CANCEL</string>
+    <string name="tv_Update">UPDATE</string>
+    <string name="btnLabel_delete">DELETE</string>
+</resources>
