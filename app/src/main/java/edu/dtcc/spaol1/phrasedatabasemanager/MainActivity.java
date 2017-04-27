@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        AddPhrase.AddStudentDialogListener, EditPhrase.UpdatePhraseListener,
+        AddPhrase.AddPhraseListener, EditPhrase.UpdatePhraseListener,
         DeletePhrase.DeleteStudentDialogListener
 {
     Button btnAddPhrase, btnEditPhrase, btnUpdatePhraseList, btnDeletePhrase;
@@ -90,33 +90,6 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
     }
-
-    /**@Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    */
-    
-    /**
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    */
     
     @Override
     public void onSaveButtonClick(DialogFragment dialog)
@@ -124,23 +97,15 @@ public class MainActivity extends AppCompatActivity implements
         // Get phrase title
         EditText etPhraseTitle = (EditText) dialog.getDialog().findViewById(R.id.etPhraseTitle);
         String phraseTitle = etPhraseTitle.getText().toString();
-        //int int_enrollNo =Integer.parseInt(etPhraseTitle.getText().toString());
 
         // Get Name
         EditText etPhrase = (EditText) dialog.getDialog().findViewById(R.id.etPhrase);
         String phrase = etPhrase.getText().toString();
-        
-        // Variables used for checking fields
-        //boolean checkPhraseTitle = checkEnrollNo(phraseTitle);
-        //boolean checkPhrase = checkName(phrase);
-        //boolean check_phnNo = checkPhoneNo(phnNo);
-        
-        db.addNewPhrase(new Phrase(phraseTitle, phrase));
 
-        Toast.makeText(getApplicationContext(),"Phrase Added",
-                    Toast.LENGTH_LONG).show();
-        
-        Toast.makeText(getApplicationContext(),"\nTitle :" + phraseTitle + "\nPhrase: " +
+        db.addNewPhrase(new Phrase(phraseTitle, phrase));
+         Toast.makeText(getApplicationContext(), "Phrase Added",
+                 Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "\nTitle :" + phraseTitle + "\nPhrase: " +
                 phrase, Toast.LENGTH_LONG).show();
     }
     
@@ -155,26 +120,11 @@ public class MainActivity extends AppCompatActivity implements
             return true;
         }
     }
-    /**
-    //Check Enrollment number
-    public boolean checkEnrollNo(String enr_No)
-    {
-        if(enr_No == "" || enr_No.length() != 3)
-        {
-
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-
-    }
 
     //Check Name
-    public boolean checkName(String stdName)
+    public boolean checkPhraseTitle(String phraseTitle)
     {
-        if(stdName == "")
+        if(phraseTitle == "")
         {
             return false;
         }
@@ -184,64 +134,46 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    //Check Phone Number
-    public boolean checkPhoneNo(String phn_No)
-    {
-        if(phn_No == "" || phn_No.length() != 10)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-
-    }
-    */
-     
     @Override
     public void onUpdateButtonClick(DialogFragment dialog)
     {
-        // Get ID
-        EditText etID = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseID);
-        String idNo = etID.getText().toString();
-        int int_idNo =Integer.parseInt(etID.getText().toString());
+        try {
 
-        // Get phrase title
-        EditText etPhraseTitle = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseTitle);
-        String phraseTitle = etPhraseTitle.getText().toString();
-        //int int_enrollNo =Integer.parseInt(etPhraseTitle.getText().toString());
 
-        // Get phrase
-        EditText etPhrase = (EditText) dialog.getDialog().findViewById(R.id.etEditPhrase);
-        String phrase = etPhrase.getText().toString();
+            // Get ID
+            EditText etID = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseID);
+            String idNo = etID.getText().toString();
+            int int_idNo = Integer.parseInt(etID.getText().toString());
 
-        boolean check_idNo = checkIDNumber(idNo);
+            // Get phrase title
+            EditText etPhraseTitle = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseTitle);
+            String phraseTitle = etPhraseTitle.getText().toString();
+            //int int_enrollNo =Integer.parseInt(etPhraseTitle.getText().toString());
 
-        //boolean check_enrollNo = checkEnrollNo(phraseTitle);
+            // Get phrase
+            EditText etPhrase = (EditText) dialog.getDialog().findViewById(R.id.etEditPhrase);
+            String phrase = etPhrase.getText().toString();
 
-        //boolean check_name = checkName(phrase);
+            boolean check_idNo = checkIDNumber(idNo);
 
-        //boolean check_phnNo = checkPhoneNo(phnNo);
+            if (check_idNo == false) {
+                Toast.makeText(getApplicationContext(), "Incorrect ID", Toast.LENGTH_LONG).show();
+            } else {
+                boolean updateCheck = db.updatePhraseInfo(int_idNo, phraseTitle, phrase);
 
-        if(check_idNo == false)
-        {
-            Toast.makeText(getApplicationContext(),"Incorrect ID",Toast.LENGTH_LONG).show();
+                if (updateCheck == true) {
+                    Toast.makeText(getApplicationContext(), "Phrase Edit Successful",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Edit Failed",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
         }
-        else
+        catch (Exception e)
         {
-            boolean updateCheck = db.updatePhraseInfo(int_idNo, phraseTitle, phrase);
-
-            if(updateCheck == true)
-            {
-                Toast.makeText(getApplicationContext(),"Phrase Added",
-                        Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(),"Edit Failed",
-                        Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(getApplicationContext(), "No ID entered, so no changes made",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -257,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(check_idNo == false)
         {
-            Toast.makeText(getApplicationContext(),"Enter Proper ID again..! :)",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Incorrect ID entered",Toast.LENGTH_LONG).show();
 
         }
         else
@@ -266,12 +198,12 @@ public class MainActivity extends AppCompatActivity implements
 
             if(deleteCheck == true)
             {
-                Toast.makeText(getApplicationContext(),"Student Deleted Successfully :)",
+                Toast.makeText(getApplicationContext(),"Deletion Successful",
                         Toast.LENGTH_LONG).show();
             }
             else
             {
-                Toast.makeText(getApplicationContext(),"Stuent Deletion Fails.. :(",
+                Toast.makeText(getApplicationContext(),"Deletion Failed",
                         Toast.LENGTH_LONG).show();
             }
         }

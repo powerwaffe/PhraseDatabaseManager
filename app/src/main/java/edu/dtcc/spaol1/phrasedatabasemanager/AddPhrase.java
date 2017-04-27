@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 public class AddPhrase extends DialogFragment
 {
     // Interface to handle the Events
-    interface AddStudentDialogListener
+    interface AddPhraseListener
     {
         void onSaveButtonClick(DialogFragment dialog);
     }
 
     // Create an Instance to deliver the action
-    AddStudentDialogListener addStudentListener;
+    AddPhraseListener addPhraseListener;
 
     @Override
     public void onAttach(Activity activity)
@@ -28,12 +28,12 @@ public class AddPhrase extends DialogFragment
         try
         {
             // Instantiate the SetPasswordDialogListener so we can send events to the host
-            addStudentListener = (AddStudentDialogListener) activity;
+            addPhraseListener = (AddPhraseListener) activity;
         } catch (ClassCastException e)
         {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
-                    + " must implement AddStudentDialogListener");
+                    + " must implement AddPhraseListener");
         }
     }
 
@@ -55,7 +55,7 @@ public class AddPhrase extends DialogFragment
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        addStudentListener.onSaveButtonClick(AddPhrase.this);
+                        addPhraseListener.onSaveButtonClick(AddPhrase.this);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
