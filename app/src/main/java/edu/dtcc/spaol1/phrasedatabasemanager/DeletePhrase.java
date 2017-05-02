@@ -10,14 +10,14 @@ import android.view.LayoutInflater;
 
 public class DeletePhrase extends DialogFragment
 {
-    //interface to handle the Events
-    interface DeleteStudentDialogListener
+    // Interface to handle the Events
+    interface DeletePhraseDialogListener
     {
         void onDeleteButtonClick(DialogFragment dialog);
     }
 
     //create an Instance to deliver the action
-    DeleteStudentDialogListener deleteStudentListener;
+    DeletePhraseDialogListener deletePhraseDialogListener;
 
     // Override the Fragment.onAttach() method to instantiate the SetPasswordDialogListener
     @Override
@@ -27,14 +27,14 @@ public class DeletePhrase extends DialogFragment
         // Verify that the host context implements the callback interface
         try
         {
-            // Instantiate the deleteStudentListener  so we can send events to the host
-            deleteStudentListener = (DeleteStudentDialogListener) context;
+            // Instantiate the deletePhraseDialogListener so we can send events to the host
+            deletePhraseDialogListener = (DeletePhraseDialogListener) context;
         }
         catch (ClassCastException e)
         {
             // The context doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
-                    + " must implement DeleteStudentDialogListener");
+                    + " must implement DeletePhraseDialogListener");
         }
     }
 
@@ -56,7 +56,7 @@ public class DeletePhrase extends DialogFragment
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        deleteStudentListener.onDeleteButtonClick(DeletePhrase.this);
+                        deletePhraseDialogListener.onDeleteButtonClick(DeletePhrase.this);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()

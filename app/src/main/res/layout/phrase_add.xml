@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Add A Phrase To The Database"
+        android:text="@string/add_a_phrase_to_the_database"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
         android:textSize="28sp" />
 
     <TextView
-        android:text="Phrase Title"
+        android:text="@string/phrase_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Phrase"
+        android:text="@string/phrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPhraseTitle"

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Edit A Phrase"
+        android:text="@string/edit_a_phrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
         android:textStyle="normal|bold" />
 
     <TextView
-        android:text="Phrase ID"
+        android:text="@string/phrase_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -37,7 +37,7 @@
         android:inputType="number" />
 
     <TextView
-        android:text="Phrase TItle"
+        android:text="@string/phrase_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etEditPhraseID"
@@ -58,7 +58,7 @@
         android:id="@+id/etEditPhraseTitle" />
 
     <TextView
-        android:text="Phrase"
+        android:text="@string/phrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etEditPhraseTitle"

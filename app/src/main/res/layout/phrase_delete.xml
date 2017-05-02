@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Delete A Phrase"
+        android:text="@string/delete_a_phrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
         android:textStyle="normal|bold" />
 
     <TextView
-        android:text="Enter Phrase ID To Delete"
+        android:text="@string/enter_phrase_id_to_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView5"

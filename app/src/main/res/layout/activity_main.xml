@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phrase Manager"
+        android:text="@string/phrase_manager"
         android:textColor="#ffffff"
         android:textStyle="normal|bold"
         android:textSize="24sp"
@@ -33,7 +33,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:text="Add a Phrase"
+        android:text="@string/add_a_phrase"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="57dp"
@@ -42,7 +42,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Delete A Phrase"
+        android:text="@string/delete_a_phrase"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnDeletePhrase"
@@ -50,7 +50,7 @@
         android:layout_above="@+id/btnEditPhrase" />
 
     <Button
-        android:text="Update Phrase List"
+        android:text="@string/update_phrase_list"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnUpdatePhraseList"
@@ -58,7 +58,7 @@
         android:layout_alignStart="@+id/btnAddPhrase" />
 
     <Button
-        android:text="Edit A Phrase"
+        android:text="@string/edit_a_phrase"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnEditPhrase"

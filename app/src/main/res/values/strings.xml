@@ -4,4 +4,14 @@
     <string name="cancel">CANCEL</string>
     <string name="tv_Update">UPDATE</string>
     <string name="btnLabel_delete">DELETE</string>
+    <string name="phrase_manager">Phrase Manager</string>
+    <string name="add_a_phrase">Add a Phrase</string>
+    <string name="delete_a_phrase">Delete A Phrase</string>
+    <string name="update_phrase_list">Update Phrase List</string>
+    <string name="edit_a_phrase">Edit A Phrase</string>
+    <string name="add_a_phrase_to_the_database">Add A Phrase To The Database</string>
+    <string name="phrase_title">Phrase Title</string>
+    <string name="phrase">Phrase</string>
+    <string name="enter_phrase_id_to_delete">Enter Phrase ID To Delete</string>
+    <string name="phrase_id">Phrase ID</string>
 </resources>

@@ -13,11 +13,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         AddPhrase.AddPhraseListener, EditPhrase.UpdatePhraseListener,
-        DeletePhrase.DeleteStudentDialogListener
+        DeletePhrase.DeletePhraseDialogListener
 {
     Button btnAddPhrase, btnEditPhrase, btnUpdatePhraseList, btnDeletePhrase;
     TextView tvPhraseList;
-    private String TAG = "StudInfo";
+    private String TAG = "PHRASE DATABASE";
     DBHandler db;
 
     @Override
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements
                 tvPhraseList.setPadding(5, 2, 5, 2);
 
                 // fetch List of BlockedNumbers form DB  method - 'getAllBlockedNumbers'
-                List<Phrase> studentsList = db.getAllPhraseList();
+                List<Phrase> phraseList = db.getAllPhraseList();
 
-                for (Phrase phrase : studentsList)
+                for (Phrase phrase : phraseList)
                 {
                     // Display each database entry into text view
                     String phraseDetail = "\n\nID:" + phrase.get_id()+ "\n\tTITLE:" 
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    //Check Name
+    //Check phrase
     public boolean checkPhraseTitle(String phraseTitle)
     {
         if(phraseTitle == "")
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements
             else
             {
                 // Do final check
-                boolean updateCheck = db.updatePhraseInfo(int_idNo, phraseTitle, phrase);
+                boolean updateCheck = db.editPhraseInfo(int_idNo, phraseTitle, phrase);
 
                 if (updateCheck == true)
                 {
