@@ -8,50 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#666666"
     tools:context="edu.dtcc.spaol1.phrasedatabasemanager.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phrase Manager"
+        android:textColor="#ffffff"
         android:textStyle="normal|bold"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="Add a Phrase"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:id="@+id/btnAddPhrase"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp" />
-
-    <Button
-        android:text="Delete A Phrase"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="49dp"
-        android:id="@+id/btnDeletePhrase"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/btnAddPhrase" />
-
-    <Button
-        android:text="Update Phrase List"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnAddPhrase"
-        android:layout_alignStart="@+id/btnAddPhrase"
-        android:id="@+id/btnUpdatePhraseList" />
-
-    <Button
-        android:text="Edit A Phrase"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDeletePhrase"
-        android:layout_alignStart="@+id/btnDeletePhrase"
-        android:id="@+id/btnEditPhrase" />
 
     <TextView
         android:layout_width="match_parent"
@@ -61,5 +29,40 @@
         android:layout_marginTop="16dp"
         android:id="@+id/tvPhraseList"
         android:gravity="center"
+        android:background="#ffffff"
         android:textSize="20sp" />
+
+    <Button
+        android:text="Add a Phrase"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:id="@+id/btnAddPhrase"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Delete A Phrase"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeletePhrase"
+        android:layout_toEndOf="@+id/btnAddPhrase"
+        android:layout_above="@+id/btnEditPhrase" />
+
+    <Button
+        android:text="Update Phrase List"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUpdatePhraseList"
+        android:layout_below="@+id/btnAddPhrase"
+        android:layout_alignStart="@+id/btnAddPhrase" />
+
+    <Button
+        android:text="Edit A Phrase"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEditPhrase"
+        android:layout_alignBaseline="@+id/btnUpdatePhraseList"
+        android:layout_alignBottom="@+id/btnUpdatePhraseList"
+        android:layout_toEndOf="@+id/btnAddPhrase" />
 </RelativeLayout>
