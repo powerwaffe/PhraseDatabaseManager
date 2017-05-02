@@ -1,9 +1,9 @@
 package edu.dtcc.spaol1.phrasedatabasemanager;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,18 +21,19 @@ public class EditPhrase extends DialogFragment
 
     // Override the Fragment.onAttach() method to instantiate the SetPasswordDialogListener
     @Override
-    public void onAttach(Activity activity)
+    public void onAttach(Context context)
     {
-        super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
+        super.onAttach(context);
+        // Verify that the host context implements the callback interface
         try
         {
             // Instantiate the updatePhraseListener so we can send events to the host
-            updatePhraseListener = (UpdatePhraseListener) activity;
-        } catch (ClassCastException e)
+            updatePhraseListener = (UpdatePhraseListener) context;
+        }
+        catch (ClassCastException e)
         {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
+            // The context doesn't implement the interface, throw exception
+            throw new ClassCastException(context.toString()
                     + " must implement UpdatePhraseListener");
         }
     }

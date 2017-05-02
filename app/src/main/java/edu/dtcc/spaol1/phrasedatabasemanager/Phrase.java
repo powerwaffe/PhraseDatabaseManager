@@ -2,16 +2,13 @@ package edu.dtcc.spaol1.phrasedatabasemanager;
 
 public class Phrase
 {
-    //Private Variable
+    // Variables
     int _id;
     String _phrase_title;
     String _phrase;
-    //String _phone_number;
 
-    //empty constructor
-    public Phrase()
-    {
-    }
+    // Empty constructor
+    public Phrase() {}
 
     // All parameter constructor
     public Phrase(int _id, String _phrase, String _phrase_title)
@@ -19,7 +16,6 @@ public class Phrase
         this._id = _id;
         this._phrase = _phrase;
         this._phrase_title = _phrase_title;
-        //this._phone_number = _phone_number;
     }
 
     // Three parameter constructor
@@ -27,7 +23,6 @@ public class Phrase
     {
         this._phrase_title = _phrase_title;
         this._phrase = _phrase;
-        //this._phone_number = _phone_number;
     }
 
     // Getters

@@ -1,7 +1,6 @@
 package edu.dtcc.spaol1.phrasedatabasemanager;
 
 import android.app.DialogFragment;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ArrowKeyMovementMethod;
@@ -19,8 +18,6 @@ public class MainActivity extends AppCompatActivity implements
     Button btnAddPhrase, btnEditPhrase, btnUpdatePhraseList, btnDeletePhrase;
     TextView tvPhraseList;
     private String TAG = "StudInfo";
-    SQLiteDatabase dtb;
-    int btnBackPressCounter = 0;
     DBHandler db;
 
     @Override
@@ -28,14 +25,15 @@ public class MainActivity extends AppCompatActivity implements
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         db = new DBHandler(this);
 
+        // Set variables to buttons
         btnAddPhrase = (Button)findViewById(R.id.btnAddPhrase);
         btnUpdatePhraseList = (Button)findViewById(R.id.btnUpdatePhraseList);
         btnEditPhrase = (Button)findViewById(R.id.btnEditPhrase);
         btnDeletePhrase = (Button)findViewById(R.id.btnDeletePhrase);
 
+        /** Button listeners */
         btnAddPhrase.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements
                 // View Block Number List in the Text View Widget
                 tvPhraseList = (TextView) findViewById(R.id.tvPhraseList);
                 tvPhraseList.setMovementMethod(ArrowKeyMovementMethod.getInstance());
-                tvPhraseList.setText("");	//	clear text area at each button press
+                tvPhraseList.setText("");	//clear text area at each button press
                 tvPhraseList.setPadding(5, 2, 5, 2);
 
                 // fetch List of BlockedNumbers form DB  method - 'getAllBlockedNumbers'
@@ -82,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements
 
                 for (Phrase phrase : studentsList)
                 {
+                    // Display each database entry into text view
                     String phraseDetail = "\n\nID:" + phrase.get_id()+ "\n\tTITLE:" 
                             + phrase.get_phrase_title()
                             +"\n\tPHRASE:" + phrase.get_phrase();
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements
     }
     
     @Override
-    public void onSaveButtonClick(DialogFragment dialog)
+    public void onAddButtonClicked(DialogFragment dialog)
     {
         // Get phrase title
         EditText etPhraseTitle = (EditText) dialog.getDialog().findViewById(R.id.etPhraseTitle);
@@ -102,9 +101,12 @@ public class MainActivity extends AppCompatActivity implements
         EditText etPhrase = (EditText) dialog.getDialog().findViewById(R.id.etPhrase);
         String phrase = etPhrase.getText().toString();
 
+        // Update with a toast message to validate adding
         db.addNewPhrase(new Phrase(phraseTitle, phrase));
          Toast.makeText(getApplicationContext(), "Phrase Added",
                  Toast.LENGTH_LONG).show();
+
+        // Second toast that displays the entry added
         Toast.makeText(getApplicationContext(), "\nTitle :" + phraseTitle + "\nPhrase: " +
                 phrase, Toast.LENGTH_LONG).show();
     }
@@ -137,9 +139,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onUpdateButtonClick(DialogFragment dialog)
     {
-        try {
-
-
+        try
+        {
             // Get ID
             EditText etID = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseID);
             String idNo = etID.getText().toString();
@@ -148,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements
             // Get phrase title
             EditText etPhraseTitle = (EditText) dialog.getDialog().findViewById(R.id.etEditPhraseTitle);
             String phraseTitle = etPhraseTitle.getText().toString();
-            //int int_enrollNo =Integer.parseInt(etPhraseTitle.getText().toString());
 
             // Get phrase
             EditText etPhrase = (EditText) dialog.getDialog().findViewById(R.id.etEditPhrase);
@@ -156,15 +156,25 @@ public class MainActivity extends AppCompatActivity implements
 
             boolean check_idNo = checkIDNumber(idNo);
 
-            if (check_idNo == false) {
+            if (check_idNo == false)
+            {
+                // Display error due to incorrect ID entered
                 Toast.makeText(getApplicationContext(), "Incorrect ID", Toast.LENGTH_LONG).show();
-            } else {
+            }
+            else
+            {
+                // Do final check
                 boolean updateCheck = db.updatePhraseInfo(int_idNo, phraseTitle, phrase);
 
-                if (updateCheck == true) {
+                if (updateCheck == true)
+                {
+                    // Successful phrase edit
                     Toast.makeText(getApplicationContext(), "Phrase Edit Successful",
                             Toast.LENGTH_LONG).show();
-                } else {
+                }
+                else
+                {
+                    // Complete failure to edit
                     Toast.makeText(getApplicationContext(), "Edit Failed",
                             Toast.LENGTH_LONG).show();
                 }
@@ -172,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         catch (Exception e)
         {
+            // Detects if an actual ID is entered and also prevents app crash
             Toast.makeText(getApplicationContext(), "No ID entered, so no changes made",
                     Toast.LENGTH_LONG).show();
         }
@@ -180,32 +191,42 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onDeleteButtonClick(DialogFragment dialog)
     {
-        // Get ID
-        EditText entId = (EditText) dialog.getDialog().findViewById(R.id.etDeletePhraseID);
-        String idNo = entId.getText().toString();
-        int int_idNo =Integer.parseInt(entId.getText().toString());
-
-        boolean check_idNo = checkIDNumber(idNo);
-
-        if(check_idNo == false)
+        try
         {
-            Toast.makeText(getApplicationContext(),"Incorrect ID entered",Toast.LENGTH_LONG).show();
+            // Get ID
+            EditText entId = (EditText) dialog.getDialog().findViewById(R.id.etDeletePhraseID);
+            String idNo = entId.getText().toString();
+            int int_idNo = Integer.parseInt(entId.getText().toString());
 
-        }
-        else
-        {
-            boolean deleteCheck = db.deletePhrase(int_idNo);
+            boolean check_idNo = checkIDNumber(idNo);
 
-            if(deleteCheck == true)
+            if (check_idNo == false)
             {
-                Toast.makeText(getApplicationContext(),"Deletion Successful",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Incorrect ID entered", Toast.LENGTH_LONG).show();
+
             }
             else
             {
-                Toast.makeText(getApplicationContext(),"Deletion Failed",
-                        Toast.LENGTH_LONG).show();
+                boolean deleteCheck = db.deletePhrase(int_idNo);
+
+                if (deleteCheck == true)
+                {
+                    Toast.makeText(getApplicationContext(), "Deletion Successful",
+                            Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Deletion Failed",
+                            Toast.LENGTH_LONG).show();
+                }
+
             }
+        }
+        catch (Exception e)
+        {
+            // Detects if an actual ID is entered and also prevents app crash
+            Toast.makeText(getApplicationContext(), "No ID entered, so no changes made",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }
